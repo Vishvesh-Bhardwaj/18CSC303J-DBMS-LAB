@@ -1,0 +1,771 @@
+SQL> commit;
+
+Commit complete.
+
+SQL> select*from EMP;
+
+no rows selected
+
+SQL> desc EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ Emp_No                                             NUMBER(6)
+ Ename                                              VARCHAR2(20)
+ DOJ                                                DATE
+ Dept                                               VARCHAR2(10)
+ Dept_No                                            NUMBER(2)
+ Designation                                        VARCHAR2(20)
+ Commision                                          VARCHAR2(20)
+ Sal                                                NUMBER(7)
+
+SQL> select* from EMP01;
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                     CLERK                      7902 17-DEC-80  
+       800                    20                                                
+                                                                                
+      7499 ALLEN                     SALESMAN                   7698 20-FEB-81  
+      1600        300         30                                                
+                                                                                
+      7521 WARD                      SALESMAN                   7698 22-FEB-81  
+      1250        500         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7566 JONES                     MANAGER                    7839 02-APR-81  
+      2975                    20                                                
+                                                                                
+      7654 MARTIN                    SALESMAN                   7698 28-SEP-81  
+      1250       1400         30                                                
+                                                                                
+      7698 BLAKE                     MANAGER                    7839 01-MAY-81  
+      2850                    30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7782 CLARK                     MANAGER                    7839 09-JUN-81  
+      2450                    10                                                
+                                                                                
+      7788 SCOTT                     ANALYST                    7566 19-APR-87  
+      3000                    20                                                
+                                                                                
+      7839 KING                      PRESIDENT                       17-NOV-81  
+      5000                    10                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7844 TURNER                    salesman                   7698 08-SEP-81  
+      1500          0         30                                                
+                                                                                
+      7876 ADAMS                     CLERK                      7788 23-MAY-87  
+      1100                    20                                                
+                                                                                
+      7900 JAMES                     CLERK                      7698 03-DEC-81  
+       950                    30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7902 FORD                      ANALYST                    7566 03-DEC-81  
+      3000                    20                                                
+                                                                                
+      7934 MILLER                    CLERK                      7782 23-JAN-82  
+      1300                    10                                                
+                                                                                
+
+14 rows selected.
+
+SQL> update EMP01 set SAL = (SAL+0.1*SAL) where JOB = 'MANAGER';
+
+3 rows updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from EMP01 where job='MANAGER' and SAL<2750;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from EMP01;
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                     CLERK                      7902 17-DEC-80  
+       800                    20                                                
+                                                                                
+      7499 ALLEN                     SALESMAN                   7698 20-FEB-81  
+      1600        300         30                                                
+                                                                                
+      7521 WARD                      SALESMAN                   7698 22-FEB-81  
+      1250        500         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7566 JONES                     MANAGER                    7839 02-APR-81  
+      3273                    20                                                
+                                                                                
+      7654 MARTIN                    SALESMAN                   7698 28-SEP-81  
+      1250       1400         30                                                
+                                                                                
+      7698 BLAKE                     MANAGER                    7839 01-MAY-81  
+      3135                    30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7788 SCOTT                     ANALYST                    7566 19-APR-87  
+      3000                    20                                                
+                                                                                
+      7839 KING                      PRESIDENT                       17-NOV-81  
+      5000                    10                                                
+                                                                                
+      7844 TURNER                    salesman                   7698 08-SEP-81  
+      1500          0         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7876 ADAMS                     CLERK                      7788 23-MAY-87  
+      1100                    20                                                
+                                                                                
+      7900 JAMES                     CLERK                      7698 03-DEC-81  
+       950                    30                                                
+                                                                                
+      7902 FORD                      ANALYST                    7566 03-DEC-81  
+      3000                    20                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7934 MILLER                    CLERK                      7782 23-JAN-82  
+      1300                    10                                                
+                                                                                
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME as Name from EMP01;
+
+NAME                                                                            
+-------------------------                                                       
+SMITH                                                                           
+ALLEN                                                                           
+WARD                                                                            
+JONES                                                                           
+MARTIN                                                                          
+BLAKE                                                                           
+SCOTT                                                                           
+KING                                                                            
+TURNER                                                                          
+ADAMS                                                                           
+JAMES                                                                           
+
+NAME                                                                            
+-------------------------                                                       
+FORD                                                                            
+MILLER                                                                          
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME||JOB from EMP01;
+
+ENAME||JOB                                                                      
+---------------------------------------------                                   
+SMITHCLERK                                                                      
+ALLENSALESMAN                                                                   
+WARDSALESMAN                                                                    
+JONESMANAGER                                                                    
+MARTINSALESMAN                                                                  
+BLAKEMANAGER                                                                    
+SCOTTANALYST                                                                    
+KINGPRESIDENT                                                                   
+TURNERsalesman                                                                  
+ADAMSCLERK                                                                      
+JAMESCLERK                                                                      
+
+ENAME||JOB                                                                      
+---------------------------------------------                                   
+FORDANALYST                                                                     
+MILLERCLERK                                                                     
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where JOB = 'CLERK';
+
+ENAME                                                                           
+-------------------------                                                       
+SMITH                                                                           
+ADAMS                                                                           
+JAMES                                                                           
+MILLER                                                                          
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from EMP01 where HIREDATE<'30-Sep-81';
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                     CLERK                      7902 17-DEC-80  
+       800                    20                                                
+                                                                                
+      7499 ALLEN                     SALESMAN                   7698 20-FEB-81  
+      1600        300         30                                                
+                                                                                
+      7521 WARD                      SALESMAN                   7698 22-FEB-81  
+      1250        500         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7566 JONES                     MANAGER                    7839 02-APR-81  
+      3273                    20                                                
+                                                                                
+      7654 MARTIN                    SALESMAN                   7698 28-SEP-81  
+      1250       1400         30                                                
+                                                                                
+      7698 BLAKE                     MANAGER                    7839 01-MAY-81  
+      3135                    30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7844 TURNER                    salesman                   7698 08-SEP-81  
+      1500          0         30                                                
+                                                                                
+
+7 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from EMP01 where EMPNO=7369 or EMPNO=7839 or EMPNO=7934 or EMPNO=7788;
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                     CLERK                      7902 17-DEC-80  
+       800                    20                                                
+                                                                                
+      7788 SCOTT                     ANALYST                    7566 19-APR-87  
+      3000                    20                                                
+                                                                                
+      7839 KING                      PRESIDENT                       17-NOV-81  
+      5000                    10                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7934 MILLER                    CLERK                      7782 23-JAN-82  
+      1300                    10                                                
+                                                                                
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from EMP01 where JOB not in ('MANAGER');
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                     CLERK                      7902 17-DEC-80  
+       800                    20                                                
+                                                                                
+      7499 ALLEN                     SALESMAN                   7698 20-FEB-81  
+      1600        300         30                                                
+                                                                                
+      7521 WARD                      SALESMAN                   7698 22-FEB-81  
+      1250        500         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7654 MARTIN                    SALESMAN                   7698 28-SEP-81  
+      1250       1400         30                                                
+                                                                                
+      7788 SCOTT                     ANALYST                    7566 19-APR-87  
+      3000                    20                                                
+                                                                                
+      7839 KING                      PRESIDENT                       17-NOV-81  
+      5000                    10                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7844 TURNER                    salesman                   7698 08-SEP-81  
+      1500          0         30                                                
+                                                                                
+      7876 ADAMS                     CLERK                      7788 23-MAY-87  
+      1100                    20                                                
+                                                                                
+      7900 JAMES                     CLERK                      7698 03-DEC-81  
+       950                    30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7902 FORD                      ANALYST                    7566 03-DEC-81  
+      3000                    20                                                
+                                                                                
+      7934 MILLER                    CLERK                      7782 23-JAN-82  
+      1300                    10                                                
+                                                                                
+
+11 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where DEPTNO not in (30,40,10);
+
+ENAME                                                                           
+-------------------------                                                       
+SMITH                                                                           
+JONES                                                                           
+SCOTT                                                                           
+ADAMS                                                                           
+FORD                                                                            
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where HIREDATE<'31-Dec-81' and HIREDATE>'30-Jun-81';
+
+ENAME                                                                           
+-------------------------                                                       
+MARTIN                                                                          
+KING                                                                            
+TURNER                                                                          
+JAMES                                                                           
+FORD                                                                            
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select unique(JOB) from EMP01;
+
+JOB                                                                             
+--------------------                                                            
+CLERK                                                                           
+SALESMAN                                                                        
+ANALYST                                                                         
+MANAGER                                                                         
+salesman                                                                        
+PRESIDENT                                                                       
+
+6 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where COMM <1 or COMM=1;
+
+ENAME                                                                           
+-------------------------                                                       
+TURNER                                                                          
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where MGR=0;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME,JOB from EMP01 where MGR=0;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from EMP01 where DEPTNO=0;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where COMM not in ('0');
+
+ENAME                                                                           
+-------------------------                                                       
+ALLEN                                                                           
+WARD                                                                            
+MARTIN                                                                          
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where COMM not in ('0','1');
+
+ENAME                                                                           
+-------------------------                                                       
+ALLEN                                                                           
+WARD                                                                            
+MARTIN                                                                          
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where ENAME='s*';
+
+no rows selected
+
+SQL> select ENAME from EMP01 where ENAME='*s';
+
+no rows selected
+
+SQL> select ENAME from EMP01 where ENAME='%s';
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where ENAME='s%';
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where ENAME like 'S%';
+
+ENAME                                                                           
+-------------------------                                                       
+SMITH                                                                           
+SCOTT                                                                           
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where ENAME like '*i%';
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME from EMP01 where ENAME like '*m%';
+
+no rows selected
+
+SQL> select ENAME from EMP01 where ENAME like '_i%';
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME,JOB,DEPTNO,HIREDATE from EMP01 order by HIREDATE;
+
+ENAME                     JOB                      DEPTNO HIREDATE              
+------------------------- -------------------- ---------- ---------             
+SMITH                     CLERK                        20 17-DEC-80             
+ALLEN                     SALESMAN                     30 20-FEB-81             
+WARD                      SALESMAN                     30 22-FEB-81             
+JONES                     MANAGER                      20 02-APR-81             
+BLAKE                     MANAGER                      30 01-MAY-81             
+TURNER                    salesman                     30 08-SEP-81             
+MARTIN                    SALESMAN                     30 28-SEP-81             
+KING                      PRESIDENT                    10 17-NOV-81             
+JAMES                     CLERK                        30 03-DEC-81             
+FORD                      ANALYST                      20 03-DEC-81             
+MILLER                    CLERK                        10 23-JAN-82             
+
+ENAME                     JOB                      DEPTNO HIREDATE              
+------------------------- -------------------- ---------- ---------             
+SCOTT                     ANALYST                      20 19-APR-87             
+ADAMS                     CLERK                        20 23-MAY-87             
+
+13 rows selected.
+
+SQL> select ENAME,JOB,DEPT,HIREDATE from EMP01 order by SAL desc;
+select ENAME,JOB,DEPT,HIREDATE from EMP01 order by SAL desc
+                 *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier 
+
+
+SQL> select ENAME,JOB,DEPTNO,HIREDATE from EMP01 order by SAL desc;
+
+ENAME                     JOB                      DEPTNO HIREDATE              
+------------------------- -------------------- ---------- ---------             
+KING                      PRESIDENT                    10 17-NOV-81             
+JONES                     MANAGER                      20 02-APR-81             
+BLAKE                     MANAGER                      30 01-MAY-81             
+SCOTT                     ANALYST                      20 19-APR-87             
+FORD                      ANALYST                      20 03-DEC-81             
+ALLEN                     SALESMAN                     30 20-FEB-81             
+TURNER                    salesman                     30 08-SEP-81             
+MILLER                    CLERK                        10 23-JAN-82             
+MARTIN                    SALESMAN                     30 28-SEP-81             
+WARD                      SALESMAN                     30 22-FEB-81             
+ADAMS                     CLERK                        20 23-MAY-87             
+
+ENAME                     JOB                      DEPTNO HIREDATE              
+------------------------- -------------------- ---------- ---------             
+JAMES                     CLERK                        30 03-DEC-81             
+SMITH                     CLERK                        20 17-DEC-80             
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME,JOB,DEPTNO,HIREDATE from EMP01 order by DEPTNO;
+
+ENAME                     JOB                      DEPTNO HIREDATE              
+------------------------- -------------------- ---------- ---------             
+KING                      PRESIDENT                    10 17-NOV-81             
+MILLER                    CLERK                        10 23-JAN-82             
+JONES                     MANAGER                      20 02-APR-81             
+SMITH                     CLERK                        20 17-DEC-80             
+SCOTT                     ANALYST                      20 19-APR-87             
+FORD                      ANALYST                      20 03-DEC-81             
+ADAMS                     CLERK                        20 23-MAY-87             
+ALLEN                     SALESMAN                     30 20-FEB-81             
+TURNER                    salesman                     30 08-SEP-81             
+JAMES                     CLERK                        30 03-DEC-81             
+WARD                      SALESMAN                     30 22-FEB-81             
+
+ENAME                     JOB                      DEPTNO HIREDATE              
+------------------------- -------------------- ---------- ---------             
+BLAKE                     MANAGER                      30 01-MAY-81             
+MARTIN                    SALESMAN                     30 28-SEP-81             
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select* from EMP;
+
+no rows selected
+
+SQL> select* from EMP01;
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                     CLERK                      7902 17-DEC-80  
+       800                    20                                                
+                                                                                
+      7499 ALLEN                     SALESMAN                   7698 20-FEB-81  
+      1600        300         30                                                
+                                                                                
+      7521 WARD                      SALESMAN                   7698 22-FEB-81  
+      1250        500         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7566 JONES                     MANAGER                    7839 02-APR-81  
+      3273                    20                                                
+                                                                                
+      7654 MARTIN                    SALESMAN                   7698 28-SEP-81  
+      1250       1400         30                                                
+                                                                                
+      7698 BLAKE                     MANAGER                    7839 01-MAY-81  
+      3135                    30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7788 SCOTT                     ANALYST                    7566 19-APR-87  
+      3000                    20                                                
+                                                                                
+      7839 KING                      PRESIDENT                       17-NOV-81  
+      5000                    10                                                
+                                                                                
+      7844 TURNER                    salesman                   7698 08-SEP-81  
+      1500          0         30                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7876 ADAMS                     CLERK                      7788 23-MAY-87  
+      1100                    20                                                
+                                                                                
+      7900 JAMES                     CLERK                      7698 03-DEC-81  
+       950                    30                                                
+                                                                                
+      7902 FORD                      ANALYST                    7566 03-DEC-81  
+      3000                    20                                                
+                                                                                
+
+     EMPNO ENAME                     JOB                         MGR HIREDATE   
+---------- ------------------------- -------------------- ---------- ---------  
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7934 MILLER                    CLERK                      7782 23-JAN-82  
+      1300                    10                                                
+                                                                                
+
+13 rows selected.
+
+SQL> select ENAME,(12*sal) as annual_salary from EMP01;
+
+ENAME                     ANNUAL_SALARY                                         
+------------------------- -------------                                         
+SMITH                              9600                                         
+ALLEN                             19200                                         
+WARD                              15000                                         
+JONES                             39276                                         
+MARTIN                            15000                                         
+BLAKE                             37620                                         
+SCOTT                             36000                                         
+KING                              60000                                         
+TURNER                            18000                                         
+ADAMS                             13200                                         
+JAMES                             11400                                         
+
+ENAME                     ANNUAL_SALARY                                         
+------------------------- -------------                                         
+FORD                              36000                                         
+MILLER                            15600                                         
+
+13 rows selected.
+
+SQL> select ENAME as Name ,(12*sal) as annual_salary from EMP01;
+
+NAME                      ANNUAL_SALARY                                         
+------------------------- -------------                                         
+SMITH                              9600                                         
+ALLEN                             19200                                         
+WARD                              15000                                         
+JONES                             39276                                         
+MARTIN                            15000                                         
+BLAKE                             37620                                         
+SCOTT                             36000                                         
+KING                              60000                                         
+TURNER                            18000                                         
+ADAMS                             13200                                         
+JAMES                             11400                                         
+
+NAME                      ANNUAL_SALARY                                         
+------------------------- -------------                                         
+FORD                              36000                                         
+MILLER                            15600                                         
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select ENAME||'_'||JOB from EMP01;
+
+ENAME||'_'||JOB                                                                 
+----------------------------------------------                                  
+SMITH_CLERK                                                                     
+ALLEN_SALESMAN                                                                  
+WARD_SALESMAN                                                                   
+JONES_MANAGER                                                                   
+MARTIN_SALESMAN                                                                 
+BLAKE_MANAGER                                                                   
+SCOTT_ANALYST                                                                   
+KING_PRESIDENT                                                                  
+TURNER_salesman                                                                 
+ADAMS_CLERK                                                                     
+JAMES_CLERK                                                                     
+
+ENAME||'_'||JOB                                                                 
+----------------------------------------------                                  
+FORD_ANALYST                                                                    
+MILLER_CLERK                                                                    
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool of

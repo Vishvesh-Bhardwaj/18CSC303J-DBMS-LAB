@@ -1,0 +1,210 @@
+SQL> commit;
+
+Commit complete.
+
+SQL> create table department(DEPT_NO number(5) primary key, DNAME varchar(10), DLOC varchar(10));
+
+Table created.
+
+SQL> create table EMP(EMP_NO number(5) primary key,ENAME varchar(10),JOB varchar(10), MANAGER_NAME varchar(10) default 'Mr.k. ram', HIRE_DATE DATE,SALARY number(50),COMMISSION number(50),DEP_NO varchar(5));
+create table EMP(EMP_NO number(5) primary key,ENAME varchar(10),JOB varchar(10), MANAGER_NAME varchar(10 default 'Mr.k. ram', HIRE_DATE DATE,SALARY number(50),COMMISSION number(50),DEP_NO varchar(5))
+                                                                                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table EMP(EMP_NO number(5) primary key,ENAME varchar(10),JOB varchar(10), MANAGER_NAME varchar(10) default 'Mr.k. ram', HIRE_DATE DATE,SALARY number(35),COMMISSION number(35),DEP_NO varchar(5));
+
+Table created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table department modify(DNAME varchar(10) NOT NULL UNIQUE);
+
+Table altered.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table EMP modify(HIRE_DATE DATE NOT NULL);
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> alter table EMP modify(SALARY number(35) check(SALARY>10000 AND SALARY<20000));
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> alter table EMP modify(COMMISSION number(35) check (COMMISSION<0.1*SALARY));
+alter table EMP modify(COMMISSION number(35) check (COMMISSION<0.1*SALARY))
+                                                                          *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns 
+
+
+SQL> alter table EMP modify(COMMISSION number(35) check (COMMISSION<10));
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> insert into department values(10,'CINTEL','SRM');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into department values(10,'nws','ktr');
+insert into department values(10,'nws','ktr')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (RA2011026010163.SYS_C006276) violated 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into EMP values(1124,'sathwik','teacher',,10-SEP-21,55555,2,123);
+insert into EMP values(1124,'sathwik','teacher',,10-SEP-21,55555,2,123)
+                                                *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> insert into EMP values(1124,'sathwik','teacher','',10-SEP-21,55555,2,123);
+insert into EMP values(1124,'sathwik','teacher','',10-SEP-21,55555,2,123)
+                                                      *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> insert into EMP values(1124,'sathwik','teacher','','10-SEP-21',55555,2,123);
+insert into EMP values(1124,'sathwik','teacher','','10-SEP-21',55555,2,123)
+*
+ERROR at line 1:
+ORA-02290: check constraint (RA2011026010163.SYS_C006291) violated 
+
+
+SQL> insert into EMP values(1124,'sathwik','teacher',NULL,'10-SEP-21',55555,2,123);
+insert into EMP values(1124,'sathwik','teacher',NULL,'10-SEP-21',55555,2,123)
+*
+ERROR at line 1:
+ORA-02290: check constraint (RA2011026010163.SYS_C006291) violated 
+
+
+SQL> insert into EMP values(1124,'sathwik','teacher',NULL,'10-SEP-21',12345,2,123);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into EMP values(112,'RAM','ACTOR','','10-OCT-21',12445,5,183);
+
+1 row created.
+
+SQL> SELECT * FROM EMP;
+
+    EMP_NO ENAME      JOB        MANAGER_NA HIRE_DATE     SALARY COMMISSION     
+---------- ---------- ---------- ---------- --------- ---------- ----------     
+DEP_N                                                                           
+-----                                                                           
+      1124 sathwik    teacher               10-SEP-21      12345          2     
+123                                                                             
+                                                                                
+       112 RAM        ACTOR                 10-OCT-21      12445          5     
+183                                                                             
+                                                                                
+
+SQL> insert into EMP(EMP_NO,ENAME,JOB,HIRE_DATE,SALARY,COMMISSION,DEP_NO)values(1245,'kumar','salesman','21-NOV-12',12581,3,144);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from EMP;\
+  2  
+SQL> select * from EMP;
+
+    EMP_NO ENAME      JOB        MANAGER_NA HIRE_DATE     SALARY COMMISSION     
+---------- ---------- ---------- ---------- --------- ---------- ----------     
+DEP_N                                                                           
+-----                                                                           
+      1124 sathwik    teacher               10-SEP-21      12345          2     
+123                                                                             
+                                                                                
+       112 RAM        ACTOR                 10-OCT-21      12445          5     
+183                                                                             
+                                                                                
+      1245 kumar      salesman   Mr.k. ram  21-NOV-12      12581          3     
+144                                                                             
+                                                                                
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> alter table EMP modify(EMP_NO number(5));
+
+Table altered.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table EMP ADD CONSTRAINT fkc FOREIGN KEY(DEP_NO) REFERENCES department(DEPT_NO);
+alter table EMP ADD CONSTRAINT fkc FOREIGN KEY(DEP_NO) REFERENCES department(DEPT_NO)
+*
+ERROR at line 1:
+ORA-03135: connection lost contact 
+Process ID: 13214 
+Session ID: 1261 Serial number: 17235 
+
+
+SQL> spool off;

@@ -1,0 +1,257 @@
+SQL*Plus: Release 11.2.0.4.0 Production on Wed Apr 5 08:24:48 2023
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Enter user-name: RA2011026010109/RA2011026010109@q1-q2-r1.c0vm8jxyhl5s.us-east-2.rds.amazonaws.com:1521/orcl
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+SQL> set serveroutput on;
+
+
+--------------------QUESTION 1---------------------------------------------------------------------
+SQL> DECLARE
+  2          celcius NUMBER;
+  3          fahrenheit NUMBER;
+  4  BEGIN
+  5          celcius := &input_celcius;
+  6          fahrenheit := 9/5 * celcius + 32;
+  7          DBMS_OUTPUT.PUT_LINE (celcius ||' Celcius = '||fahrenheit|| ' Fahrenheit');
+  8       END;
+  9  /
+Enter value for input_celcius: 30
+old   5:         celcius := &input_celcius;
+new   5:         celcius := 30;
+30 Celcius = 86 Fahrenheit
+
+PL/SQL procedure successfully completed.
+
+PL/SQL procedure successfully completed.
+
+
+//////////////////
+DECLARE
+   fahrenheit NUMBER;
+   celsius NUMBER;
+BEGIN
+   DBMS_OUTPUT.PUT('Enter temperature in Fahrenheit: ');
+   fahrenheit := &fahrenheit_input;
+   celsius := (fahrenheit - 32) * (5/9);
+   DBMS_OUTPUT.PUT_LINE('Temperature in Celsius: ' || celsius);
+END;
+
+
+// Note: The user input can be taken by replacing the &fahrenheit_input, &number_input with actual values during runtime.
+//////////////////////
+
+
+--------------------QUESTION 2---------------------------------------------------------------------
+
+
+
+SQL> DECLARE
+  2      -- Declare variable num
+  3      num NUMBER(3) := 2;
+  4      sum1 NUMBER(4) := 0;
+  5  BEGIN
+  6      WHILE num <= 5 LOOP
+  7
+  8          -- Display even number
+  9          dbms_output.Put_line(num);
+ 10
+ 11          -- Sum of even numbers
+ 12          sum1 := sum1 + num;
+ 13
+ 14          -- Next even number
+ 15          num := num + 2;
+ 16
+ 17
+ 18      -- End  loop
+ 19      END LOOP;
+ 20
+ 21      -- Display even number
+ 22          dbms_output.Put_line('Sum of even numbers is ' || sum1);
+ 23  END;
+ 24  /
+2
+4
+Sum of even numbers is 6
+
+PL/SQL procedure successfully completed.
+
+///////////////////////
+DECLARE
+   n NUMBER;
+   sum NUMBER := 0;
+BEGIN
+   DBMS_OUTPUT.PUT('Enter a number: ');
+   n := &number_input;
+   FOR i IN 1..n LOOP
+      IF MOD(i, 2) = 0 THEN
+         sum := sum + i;
+      END IF;
+   END LOOP;
+   DBMS_OUTPUT.PUT_LINE('Sum of even integers: ' || sum);
+END;
+///////////////////////////////
+
+
+--------------------QUESTION 3---------------------------------------------------------------------
+
+
+
+PL/SQL procedure successfully completed.
+
+SQL> Declare
+  2      a number;
+  3      b number;
+  4      c number;
+  5  Begin
+  6      dbms_output.put_line('Enter a:');
+  7          a:=&a;
+  8      dbms_output.put_line('Enter b:');
+  9          b:=&b;
+ 10      dbms_output.put_line('Enter c:');
+ 11          c:=&C;
+ 12  if (a>b) and (a>c)
+ 13      then
+ 14      dbms_output.put_line('A is GREATEST'||A);
+ 15  elsif (b>a) and (b>c)
+ 16      then
+ 17      dbms_output.put_line('B is GREATEST'||B);
+ 18  else
+ 19      dbms_output.put_line('C is GREATEST'||C);
+ 20  end if;
+ 21  End;
+ 22  /
+Enter value for a: 2
+old   7:         a:=&a;
+new   7:         a:=2;
+Enter value for b: 6
+old   9:         b:=&b;
+new   9:         b:=6;
+Enter value for c: 8
+old  11:         c:=&C;
+new  11:         c:=8;
+Enter a:
+Enter b:
+Enter c:
+C is GREATEST8
+
+PL/SQL procedure successfully completed.
+
+////////////////////////////
+DECLARE
+   num1 NUMBER;
+   num2 NUMBER;
+   num3 NUMBER;
+   max NUMBER;
+BEGIN
+   DBMS_OUTPUT.PUT('Enter first number: ');
+   num1 := &number_input;
+   DBMS_OUTPUT.PUT('Enter second number: ');
+   num2 := &number_input;
+   DBMS_OUTPUT.PUT('Enter third number: ');
+   num3 := &number_input;
+   IF num1 > num2 AND num1 > num3 THEN
+      max := num1;
+   ELSIF num2 > num1 AND num2 > num3 THEN
+      max := num2;
+   ELSE
+      max := num3;
+   END IF;
+   DBMS_OUTPUT.PUT_LINE('The greatest number is: ' || max);
+END;
+
+///////////////////////////////////////
+
+
+
+--------------------QUESTION 4---------------------------------------------------------------------
+
+SQL> DECLARE
+  2      -- Declare variable n, s, r, len
+  3      -- and m of datatype number
+  4      n NUMBER := 1634;
+  5      r NUMBER;
+  6  BEGIN
+  7      -- Calculating modulo
+  8      r := MOD(n, 2);
+  9
+ 10      IF r = 0 THEN
+ 11        dbms_output.Put_line('Even');
+ 12      ELSE
+ 13        dbms_output.Put_line('Odd');
+ 14      END IF;
+ 15  END;
+ 16  /
+Even
+
+PL/SQL procedure successfully completed.
+
+///////////////////////////
+DECLARE
+   num NUMBER;
+BEGIN
+   DBMS_OUTPUT.PUT('Enter a number: ');
+   num := &number_input;
+   IF MOD(num, 2) = 0 THEN
+      DBMS_OUTPUT.PUT_LINE('The number is even');
+   ELSE
+      DBMS_OUTPUT.PUT_LINE('The number is odd');
+   END IF;
+END;
+////////////////////////////////////
+
+
+--------------------QUESTION 5---------------------------------------------------------------------
+
+SQL> declare
+  2  -- it gives the final answer after computation
+  3  fac number :=1;
+  4
+  5  -- given number n
+  6  -- taking input from user
+  7  n number := &1;
+  8
+  9  -- start block
+ 10  begin
+ 11
+ 12  -- start while loop
+ 13  while n > 0 loop
+ 14
+ 15  -- multiple with n and decrease n's value
+ 16  fac:=n*fac;
+ 17  n:=n-1;
+ 18  end loop;
+ 19  -- end loop
+ 20
+ 21  -- print result of fac
+ 22  dbms_output.put_line(fac);
+ 23
+ 24  -- end the begin block
+ 25  end;
+ 26  /
+Enter value for 1: 5
+old   7: n number := &1;
+new   7: n number := 5;
+120
+
+PL/SQL procedure successfully completed.
+
+///////////////////////
+DECLARE
+   num NUMBER;
+   fact NUMBER := 1;
+BEGIN
+   DBMS_OUTPUT.PUT('Enter a number: ');
+   num := &number_input;
+   FOR i IN 1..num LOOP
+      fact := fact * i;
+   END LOOP;
+   DBMS_OUTPUT.PUT_LINE('Factorial of ' || num || ' is: ' || fact);
+END;
+/////////////////////////////////
+SQL>
+

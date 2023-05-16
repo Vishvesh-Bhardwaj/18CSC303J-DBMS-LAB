@@ -1,0 +1,169 @@
+
+SQL*Plus: Release 11.2.0.4.0 Production on Thu Apr 6 13:19:53 2023
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Enter user-name: RA2011026010109/RA2011026010109@q1-q2-r1.c0vm8jxyhl5s.us-east-2.rds.amazonaws.com:1521/orcl
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+SQL>  CREATE VIEW empv10 AS SELECT empno, ename, job,sal FROM EMP8 WHERE deptno = 10;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> CREATE VIEW empv30 AS SELECT empno AS "Employee Number", ename AS "Employee Name", sal AS "Salary" FROM EMP8 WHERE deptno = 30;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> UPDATE empv10 SET sal = sal * 1.1 WHERE job = 'CLERK';
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> CREATE OR REPLACE VIEW empv10 AS SELECT empno AS "Employee Number", ename AS "Employee Name", job AS "Job Title", sal AS "Salary" FROM EMP8 WHERE deptno = 10;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> CREATE VIEW pay AS SELECT ename, sal/12 AS monthly_sal, sal*12 AS annual_sal, deptno FROM EMP8;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> CREATE VIEW dept_stat AS SELECT d.deptno, d.dname, MIN(e.sal) AS min_sal, MAX(e.sal) AS max_sal, SUM(e.sal) AS total_sal FROM EMP8 e JOIN DEPT d ON e.deptno = d.deptno GROUP BY d.deptno, d.dname;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create or replace view empv20
+  2     as select * from emp where deptno = 20
+  3     with check option constraint empv20_ck;
+   as select * from emp where deptno = 20
+                              *
+ERROR at line 2:
+ORA-00904: "DEPTNO": invalid identifier
+
+
+SQL> create or replace view empv20
+  2     as select * from EMP8 where deptno = 20
+  3     with check option constraint empv20_ck;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL>  CREATE VIEW empv40 AS SELECT * FROM emp WHERE deptno = 10 WITH READ ONLY;
+ CREATE VIEW empv40 AS SELECT * FROM emp WHERE deptno = 10 WITH READ ONLY
+                                               *
+ERROR at line 1:
+ORA-00904: "DEPTNO": invalid identifier
+
+
+SQL> CREATE VIEW empv40 AS SELECT * FROM EMP8 WHERE deptno = 10 WITH READ ONLY;
+
+View created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> DROP VIEW empv20;
+
+View dropped.
+
+SQL> select * from empv10;
+
+Employee Number Employee N Job Title     Salary
+--------------- ---------- --------- ----------
+           7782 CLARK      MANAGER         2450
+           7839 KING       PRESIDENT       5000
+           7934 MILLER     CLERK           1430
+
+SQL> select * from empv30;
+
+Employee Number Employee N     Salary
+--------------- ---------- ----------
+           7499 ALLEN            1600
+           7521 WARD             1250
+           7654 MARTIN           1250
+           7698 BLAKE            2850
+           7844 TURNER           1500
+           7900 JAMES             950
+
+6 rows selected.
+
+SQL> select * from empv40;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450
+        10
+
+      7839 KING       PRESIDENT            17-NOV-81       5000
+        10
+
+      7934 MILLER     CLERK           7782 23-JAN-82       1430
+        10
+
+
+SQL> select * from pay;
+
+ENAME      MONTHLY_SAL ANNUAL_SAL     DEPTNO
+---------- ----------- ---------- ----------
+SMITH       66.6666667       9600         20
+ALLEN       133.333333      19200         30
+WARD        104.166667      15000         30
+JONES       247.916667      35700         20
+MARTIN      104.166667      15000         30
+BLAKE            237.5      34200         30
+CLARK       204.166667      29400         10
+SCOTT              250      36000         20
+KING        416.666667      60000         10
+TURNER             125      18000         30
+ADAMS       91.6666667      13200         20
+
+ENAME      MONTHLY_SAL ANNUAL_SAL     DEPTNO
+---------- ----------- ---------- ----------
+JAMES       79.1666667      11400         30
+FORD               250      36000         20
+MILLER      119.166667      17160         10
+
+14 rows selected.
+
+SQL> select * from dept_stat;
+
+    DEPTNO DNAME             MIN_SAL    MAX_SAL  TOTAL_SAL
+---------- -------------- ---------- ---------- ----------
+        10 ACCOUNTING           1430       5000       8880
+        20 RESEARCH              800       3000      10875
+
+SQL> commit;
+
+Commit complete.
+
+SQL>

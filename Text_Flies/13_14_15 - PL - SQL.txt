@@ -1,0 +1,174 @@
+
+SQL*Plus: Release 11.2.0.4.0 Production on Fri Apr 28 08:42:41 2023
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Enter user-name: RA2011026010109/RA2011026010109@q1-q2-r1.c0vm8jxyhl5s.us-east-2.rds.amazonaws.com:1521/orcl
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+SQL> set serveroutput on;
+SQL> Select * from employees;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7369 SMITH      CLERK           7902 17-DEC-80        920
+        20
+
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300
+        30
+
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7566 JONES      MANAGER         7839 02-APR-81    3421.25
+        20
+
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400
+        30
+
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450
+        10
+
+      7788 SCOTT      ANALYST         7566 19-APR-87       3450
+        20
+
+      7839 KING       PRESIDENT            17-NOV-81       5000
+        10
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0
+        30
+
+      7876 ADAMS      CLERK           7788 23-MAY-87       1265
+        20
+
+      7900 JAMES      CLERK           7698 03-DEC-81        950
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7902 FORD       ANALYST         7566 03-DEC-81       3450
+        20
+
+      7934 MILLER     CLERK           7782 23-JAN-82       1300
+        10
+
+
+14 rows selected.
+
+SQL> Declare
+  2      num number(5);
+  3      Begin
+  4      update employees set sal = sal + sal*0.15 where deptno=20; if SQL%NOTFOUND then
+  5      dbms_output.put_line('none of the salaries were updated');
+  6      elsif SQL%FOUND then
+  7      num := SQL%ROWCOUNT;
+  8      dbms_output.put_line('salaries for ' || num || 'employees are updated');
+  9      end if;
+ 10      End;
+ 11     /
+salaries for 5employees are updated
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2       a number;
+  3       b number;
+  4       c number;
+  5       begin
+  6       a:=&a;
+  7       b:=&b;
+  8       if(b>0)then
+  9       c:=a/b;
+ 10      dbms_output.put_line('C is'||c);
+ 11      else
+ 12      c:=a/b;
+ 13      end if;
+ 14      exception
+ 15      when zero_divide then
+ 16      dbms_output.put_line('Divide by zero error');
+ 17      end;
+ 18     /
+Enter value for a: 8
+old   6:      a:=&a;
+new   6:      a:=8;
+Enter value for b: 4
+old   7:      b:=&b;
+new   7:      b:=4;
+C is2
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2       age number;
+  3       inage exception;
+  4       begin
+  5       age:=&age;
+  6       if ((age>=0) and (age<200))then
+  7       dbms_output.put_line('Your Age is:'||age);
+  8       else
+  9       raise inage;
+ 10      end if;
+ 11      exception
+ 12      when inage then
+ 13      dbms_output.put_line('Invalid age error');
+ 14      end;
+ 15     /
+Enter value for age: 20
+old   5:      age:=&age;
+new   5:      age:=20;
+Your Age is:20
+
+PL/SQL procedure successfully completed.
+
+SQL> select*from employeees;
+
+       ENO ENAME           DEPT      SALARY
+---------- --------------- ----- ----------
+       101 Sayak           CSE        20000
+       102 Yash            CSE        17000
+       103 Roopal          CSE        19000
+       104 Utkarsh         CSE        16000
+       105 Aditya          IT         12000
+
+
+
+SQL> create or replace trigger salarychanges
+  2      before  insert or update on employeees
+  3      for each row
+  4      when (new.eno>0)
+  5  declare
+  6      sal_diff number;
+  7  begin
+  8      sal_diff:= :new.salary - :old.salary;
+  9      dbms_output.put_line('Old Salary = '|| :old.salary);
+ 10      dbms_output.put_line('New Salary = '|| :new.salary);
+ 11      dbms_output.put_line('Salary Difference = '|| sal_diff);
+ 12  end;
+ 13  /
+
+Trigger created.

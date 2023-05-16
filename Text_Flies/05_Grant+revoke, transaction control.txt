@@ -1,0 +1,146 @@
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from RA2011026010117;
+select * from RA2011026010117
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from RA2011026010117.DEPT;
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        40 OPERATIONS     BOSTON                                                
+        50 MANUFACTURING  BOSTON                                                
+
+SQL> commit;
+
+Commit complete.
+
+SQL> CREATE TABLE DEPT (
+  2    DEPTNO NUMBER(2) PRIMARY KEY,
+  3    DNAME VARCHAR2(14),
+  4    LOC VARCHAR2(13)
+  5  );
+
+Table created.
+
+SQL> select*from DEPT;
+
+no rows selected
+
+SQL> INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (10, 'ACCOUNTING', 'NEW YORK');
+
+1 row created.
+
+SQL> INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (20, 'RESEARCH', 'DALLAS');
+
+1 row created.
+
+SQL> INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (30, 'SALES', 'CHICAGO');
+
+1 row created.
+
+SQL> INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
+
+1 row created.
+
+SQL> INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (50, 'MANUFACTURING', 'BOSTON');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select*from DEPT;
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        30 SALES          CHICAGO                                               
+        40 OPERATIONS     BOSTON                                                
+        50 MANUFACTURING  BOSTON                                                
+
+SQL> grant all on DEPT to RA2011026010117;
+
+Grant succeeded.
+
+SQL> select*from DEPT;
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        30 SALES          CHICAGO                                               
+        40 OPERATIONS     BOSTON                                                
+        50 MANUFACTURING  BOSTON                                                
+
+SQL> Revoke all on DEPT from RA2011026010117;
+
+Revoke succeeded.
+
+SQL> UPDATE DEPT
+  2  SET LOC = 'San Francisco'
+  3  WHERE DEPTNO = 40;
+
+1 row updated.
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        30 SALES          CHICAGO                                               
+        40 OPERATIONS     BOSTON                                                
+        50 MANUFACTURING  BOSTON                                                
+
+SQL> DELETE FROM DEPT
+  2  WHERE LOC = 'CHICAGO';
+
+1 row deleted.
+
+SQL> UPDATE DEPT
+  2  SET LOC = 'BOSTON'
+  3  WHERE DEPTNO = 40;
+
+1 row updated.
+
+SQL> SAVEPOINT update_over;
+
+Savepoint created.
+
+SQL> INSERT INTO DEPT (DEPTNO, DNAME, LOC)
+  2  VALUES (60, 'MARKETING', 'LOS ANGELES');
+
+1 row created.
+
+SQL> SAVEPOINT update_another;
+
+Savepoint created.
+
+SQL> ROLLBACK TO SAVEPOINT update_over;
+
+Rollback complete.
+
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        40 OPERATIONS     BOSTON                                                
+        50 MANUFACTURING  BOSTON                                                
+
+SQL> spool off;

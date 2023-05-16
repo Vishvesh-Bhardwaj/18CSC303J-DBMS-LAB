@@ -1,0 +1,164 @@
+SQL*Plus: Release 11.2.0.4.0 Production on Fri Apr 21 08:38:59 2023
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Enter user-name: RA2011026010109/RA2011026010109@q1-q2-r1.c0vm8jxyhl5s.us-east-2.rds.amazonaws.com:1521/orcl
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+-------------------------------------------------------------------------
+
+SQL> set serveroutput on;
+
+---------------------------------------------------------------------
+
+1. Write a pl/sql function recursive code for finding factorial of a number.
+
+
+SQL> CREATE OR REPLACE FUNCTION factorial(n IN NUMBER) RETURN NUMBER
+  2  IS
+  3  BEGIN
+  4    -- base case
+  5    IF n = 0 THEN
+  6      RETURN 1;
+  7    ELSE
+  8      -- recursive case
+  9      RETURN n * factorial(n - 1);
+ 10    END IF;
+ 11  END;
+ 12  /
+
+Function created.
+
+SQL> SELECT factorial(5) AS factorial_of_5 FROM dual;
+
+FACTORIAL_OF_5
+--------------
+           120
+----------------------------------------------------------------------------
+
+2. Write a pl/sql function for finding a number is a prime number.
+
+
+SQL> declare
+    n number;
+   i number;
+   flag number;
+  
+   begin
+   i:=2;
+    flag:=1;
+   n:=&n;
+ 
+   for i in 2..n/2
+   loop
+   if mod(n,i)=0
+   then
+   flag:=0;
+  exit;
+  end if;
+  end loop;
+ 
+  if flag=1
+  then
+   dbms_output.put_line('prime');
+  else
+   dbms_output.put_line('not prime');
+   end if;
+   end;
+   /
+Enter value for n: 17
+old   9: n:=&n;
+new   9: n:=17;
+prime
+
+PL/SQL procedure successfully completed
+
+-----------------------------------------------------------------------
+
+3. Write a pl/sql function to retrieve the count of students from ‘CSE’ department from the
+table Student (Sno, sname, dept, cgpa).
+
+
+SQL> Select* from Student;
+
+       SNO SNAME           DEPT                  CGPA
+---------- --------------- --------------- ----------
+        75 Nisheeth        CSE                      9
+        98 Abhishek        CSE                      9
+        69 Devesh          ECE                      8
+        70 Ayush           Aero                     7
+       109 Vishvesh        CSE                     10
+
+SQL> CREATE OR REPLACE FUNCTION count_cse_students RETURN NUMBER
+  2  IS
+  3    cse_student_count NUMBER := 0;
+  4  BEGIN
+  5    SELECT COUNT(*) INTO cse_student_count FROM Student WHERE dept = 'CSE';
+  6    RETURN cse_student_count;
+  7  END;
+  8  /
+
+Function created.
+
+SQL> SELECT count_cse_students() AS cse_student_count FROM dual;
+
+CSE_STUDENT_COUNT
+-----------------
+                3
+
+---------------------------------------------------------------------------------
+
+4. Write a pl/sql function to retrieve the maximum CGPA of the student from the table
+Student (Sno, sname, dept, cgpa).
+
+
+SQL> CREATE OR REPLACE FUNCTION max_cgpa RETURN NUMBER
+  2  IS
+  3    max_cgpa_value NUMBER;
+  4  BEGIN
+  5    SELECT MAX(cgpa) INTO max_cgpa_value FROM Student;
+  6    RETURN max_cgpa_value;
+  7  END;
+  8
+  9  /
+
+Function created.
+
+SQL> SELECT max_cgpa() AS max_cgpa FROM dual;
+
+  MAX_CGPA
+----------
+        10
+
+------------------------------------------------------------------------------------------
+
+5. Write a simple PL/SQL Function that computes and returns the average of two
+numbers.
+
+
+SQL>  DECLARE
+  2     a NUMBER := 3;
+  3     b NUMBER := 7;
+  4
+  5     sumOf2 NUMBER;
+  6     avgOf2 NUMBER;
+  7     BEGIN
+  8     sumOf2 := a + b;
+  9     avgOf2 := sumOf2 /2;
+ 10
+ 11    dbms_output.Put_line('Average = '||avgOf2);
+ 12    END;
+ 13  /
+Average = 5
+
+PL/SQL procedure successfully completed.
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
+
+-------------------------------------------------------------------------------------------------
